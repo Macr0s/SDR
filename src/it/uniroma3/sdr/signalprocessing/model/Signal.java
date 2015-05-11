@@ -47,6 +47,7 @@ public class Signal implements SignalType {
 		this.values = (LinkedList<Complex>) values;
 	}
 	
+	@Override
 	public Complex get(int i){
 		Complex r = this.values.get(i);
 		
@@ -84,5 +85,9 @@ public class Signal implements SignalType {
 	
 	public boolean saveOnFile(File f){
 		return SignalUtils.saveOnFile(this, f);
+	}
+	
+	public double energy(){
+		return SignalProcessor.energy(this);
 	}
 }

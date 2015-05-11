@@ -53,4 +53,13 @@ public class SignalProcessor {
 	public static List<Double> demodulatore(Signal in){				
 		return (List<Double>) new Demodulatore(in).esegui();
 	}
+	
+	public static double energy(Signal s){
+		int n = s.size();
+		double zParziale =0;
+		for(Complex c : s.getValues()){
+			zParziale += Math.pow(c.modulo(), 2);
+		}
+		return zParziale*(1/n);
+	}
 }
