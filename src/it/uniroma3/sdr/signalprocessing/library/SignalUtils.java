@@ -17,8 +17,8 @@ public class SignalUtils {
 	public static Signal loadFromFile(File f){
 		try {
 			Scanner s = new Scanner(new FileInputStream(f));
+			s.useDelimiter("\n");
 			List<Complex> signalRaw = new LinkedList<>();
-			
 			String[] data;
 			while(s.hasNext()){
 				data = s.next().split("\t");

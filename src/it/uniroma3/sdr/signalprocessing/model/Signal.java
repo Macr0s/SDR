@@ -71,7 +71,9 @@ public class Signal implements SignalType {
 	}
 
 	public double snrCalculator(){
-		return (1.0/(this.energy()-1));
+		double snrNonDB = 1.0/(this.energy()-1);
+		System.out.println(snrNonDB);
+		return 10*Math.log10(snrNonDB);
 	}
 
 	public List<Signal> divideInto(int num) {

@@ -15,7 +15,7 @@ public class MathUtils {
 		for(double value : energies){
 			mParziale += value;
 		}
-		return mParziale/size;
+		return mParziale/(double)size;
 	}
 	//E[(x-E[x])^2]
 	//o anche somm (Xi-Mx)^2
@@ -25,7 +25,7 @@ public class MathUtils {
 		for(double x : energies){
 			vPartiale += Math.pow(x-meanValue, 2);
 		}
-		return vPartiale/size;
+		return vPartiale/(double)size;
 	}
 
 

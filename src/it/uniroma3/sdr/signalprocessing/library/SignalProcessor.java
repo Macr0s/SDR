@@ -9,7 +9,7 @@ public class SignalProcessor {
 		for(Complex c : s.getValues()){
 			zParziale += Math.pow(c.modulo(), 2);
 		}
-		return (1/n)*zParziale;
+		return ((double)1/(double)n)*zParziale;
 	}
 
 	

@@ -15,8 +15,9 @@ public class IpotesiH1 {
 
 
 	public boolean isSpectrumHole(double soglia, Signal signal) {
-		
-		return signal.energy()<soglia; 
+		double en =signal.energy();
+		System.out.println("en segnale"+ en);
+		return en<soglia; 
 		
 	}
 

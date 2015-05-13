@@ -24,27 +24,17 @@ public class IpotesiH0 {
 	
 	
 	public double calcolaSoglia() throws Exception{
-		List<Signal> noiseList = this.generaNoises(1/pfa,snr);
-		List<Double> energyList = this.calcolaEnergiaNoises(noiseList);
+		List<Double> energyList = this.calcolaEnergiaNoises(1/pfa,snr);
 		this.soglia = this.calcolaSoglia(energyList, this.pfa);
 		return this.soglia;
 	}
 	
-	
-	private List<Signal> generaNoises(double quantita,double snr) {
-		List<Signal> noiseList = new LinkedList<>();
-		SignalFormType nois = new Noise(quantita);
-		Signal noise;
-		for(int i=0; i<quantita;i++){
-			noise = new GeneratedSignal(this.sizeSegnale, nois);
-			noiseList.add(noise);
-		}
-		return noiseList;
-	}
 
-	private List<Double> calcolaEnergiaNoises(List<Signal> noiseList) {
+	private List<Double> calcolaEnergiaNoises(double quantita,double snr) {
 		List<Double> energyList = new LinkedList<>();
-		for(Signal noise : noiseList){
+		SignalFormType nois = new Noise(quantita);
+		for(int i=0; i<quantita;i++){
+			Signal noise = new GeneratedSignal(this.sizeSegnale, nois);
 			energyList.add(noise.energy());
 		}
 		return energyList;
