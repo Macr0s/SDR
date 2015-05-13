@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 import it.uniroma3.sdr.signalprocessing.model.Complex;
@@ -15,15 +17,16 @@ public class SignalUtils {
 	public static Signal loadFromFile(File f){
 		try {
 			Scanner s = new Scanner(new FileInputStream(f));
-			Signal out = new Signal();
+			List<Complex> signalRaw = new LinkedList<>();
 			
+			String[] data;
 			while(s.hasNext()){
-				String[] data = s.next().split("\t");
-				out.add(new Complex(new Double(data[0]).doubleValue(),
+				data = s.next().split("\t");
+				signalRaw.add(new Complex(new Double(data[0]).doubleValue(),
 									new Double(data[1]).doubleValue() ));
 			}
 			s.close();
-			return out;
+			return new Signal(signalRaw);
 		} catch (FileNotFoundException e) {
 			return null;
 		}

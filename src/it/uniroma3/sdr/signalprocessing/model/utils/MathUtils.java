@@ -4,8 +4,33 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.List;
 
 public class MathUtils {
+
+	//E[z]
+	public static double valorMedio(List<Double> energies){
+		int size = energies.size();
+		double mParziale =0;
+		for(double value : energies){
+			mParziale += value;
+		}
+		return mParziale/size;
+	}
+	//E[(x-E[x])^2]
+	//o anche somm (Xi-Mx)^2
+	public static double varianza(List<Double> energies,double meanValue){
+		int size = energies.size();
+		double vPartiale=0;
+		for(double x : energies){
+			vPartiale += Math.pow(x-meanValue, 2);
+		}
+		return vPartiale/size;
+	}
+
+
+
+
 	/* calcola la funzione di errore inversa */
 
 	public static double InvErf(double d) throws Exception {
