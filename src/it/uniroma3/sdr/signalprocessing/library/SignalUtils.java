@@ -12,8 +12,16 @@ import java.util.Scanner;
 import it.uniroma3.sdr.signalprocessing.model.Complex;
 import it.uniroma3.sdr.signalprocessing.model.Signal;
 
+/**
+ * 
+ * Classe che si occupa della gestione di campioni contenuti in file
+ *
+ * @author Filippi,Sgaraglia,Oddi
+ *
+ */
 public class SignalUtils {
 
+	
 	public static Signal loadFromFile(File f){
 		try {
 			Scanner s = new Scanner(new FileInputStream(f));

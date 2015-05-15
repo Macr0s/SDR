@@ -9,6 +9,12 @@ import it.uniroma3.sdr.signalprocessing.model.utils.MathUtils;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * La classe rappresenta la prima ipotesi binario del metodo energy detection.
+ * 
+ * @author Oddi,Sgaraglia,Filippi
+ *
+ */
 public class IpotesiH0 {
 	
 	private double pfa;
@@ -23,16 +29,23 @@ public class IpotesiH0 {
 	}
 	
 	
+	/**
+	 * calcola la soglia in base all'energia del rumore generato con un certo SNR
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	public double calcolaSoglia() throws Exception{
-		List<Double> energyList = this.calcolaEnergiaNoises(1/pfa,snr);
+		List<Double> energyList = this.calcolaEnergiaNoises();
 		this.soglia = this.calcolaSoglia(energyList, this.pfa);
 		return this.soglia;
 	}
 	
 
-	private List<Double> calcolaEnergiaNoises(double quantita,double snr) {
+	private List<Double> calcolaEnergiaNoises() {
 		List<Double> energyList = new LinkedList<>();
-		SignalFormType nois = new Noise(snr);
+		double quantita = 1/pfa;
+		SignalFormType nois = new Noise(this.snr);
 		for(int i=0; i<quantita;i++){
 			Signal noise = new GeneratedSignal(this.sizeSegnale, nois);
 			energyList.add(noise.energy());

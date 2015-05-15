@@ -1,10 +1,14 @@
 package it.uniroma3.sdr.signalprocessing.library.phases;
 
-
-
 import it.uniroma3.sdr.signalprocessing.library.MethodDetection;
 import it.uniroma3.sdr.signalprocessing.model.Signal;
 
+/**
+ * La classe implementa un metodo di detection basato sull'analisi del rapporto fra l'energia del segnale e quella del rumore
+ * 
+ * @author Sgaraglia,Filippi,Oddi
+ *
+ */
 public class EnergyDetection implements MethodDetection{
 	private IpotesiH0 h0;
 	private IpotesiH1 h1;
@@ -22,7 +26,8 @@ public class EnergyDetection implements MethodDetection{
 	}
 
 /**
- * per chi non conoscesse il greco  il simbolo della soglia si pronuncia Eta
+ * Metodo che calcola la soglia di una trasmissione utilizzano l'ipotesi h0
+ * (nota dei programmatori: in greco η = eta )
  * @return
  * @throws Exception 
  */
@@ -31,7 +36,10 @@ public class EnergyDetection implements MethodDetection{
 		this.sogliaCalcolata = true;
 		return soglia;
 	}
-	
+
+	/**
+	 * verifica se c'è uno specrtum hole
+	 */
 	@Override
 	public boolean isSpectrumHole(Signal signal) {
 		if (!this.sogliaCalcolata){

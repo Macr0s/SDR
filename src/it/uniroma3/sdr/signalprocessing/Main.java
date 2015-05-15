@@ -1,7 +1,6 @@
 package it.uniroma3.sdr.signalprocessing;
 
 import java.io.File;
-
 import it.uniroma3.sdr.signalprocessing.library.Detector;
 import it.uniroma3.sdr.signalprocessing.library.phases.EnergyDetection;
 import it.uniroma3.sdr.signalprocessing.model.GeneratedSignal;
