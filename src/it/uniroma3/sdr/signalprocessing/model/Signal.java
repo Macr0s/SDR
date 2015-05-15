@@ -72,7 +72,6 @@ public class Signal implements SignalType {
 
 	public double snrCalculator(){
 		double snrNonDB = 1.0/(this.energy()-1);
-		if (snrNonDB <= 0) return Double.NEGATIVE_INFINITY;
 		return 10*Math.log10(snrNonDB);
 	}
 
