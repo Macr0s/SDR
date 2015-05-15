@@ -32,7 +32,7 @@ public class IpotesiH0 {
 
 	private List<Double> calcolaEnergiaNoises(double quantita,double snr) {
 		List<Double> energyList = new LinkedList<>();
-		SignalFormType nois = new Noise(quantita);
+		SignalFormType nois = new Noise(snr);
 		for(int i=0; i<quantita;i++){
 			Signal noise = new GeneratedSignal(this.sizeSegnale, nois);
 			energyList.add(noise.energy());

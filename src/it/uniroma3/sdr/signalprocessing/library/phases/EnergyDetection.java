@@ -13,7 +13,11 @@ public class EnergyDetection implements MethodDetection{
 	
 	
 	public EnergyDetection(double snr, double pfa,int size){
-		this.h0 = new IpotesiH0(pfa, snr, size); 
+		this(snr, pfa, size, size); 
+	}
+	
+	public EnergyDetection(double snr, double pfa,int size, int noiseSize){
+		this.h0 = new IpotesiH0(pfa, snr, noiseSize); 
 		this.h1 = new IpotesiH1(); 
 	}
 

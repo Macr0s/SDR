@@ -102,7 +102,8 @@ public class MathUtils {
 				bd = bd.add(xBD.multiply(coeff, MathContext.UNLIMITED));
 
 			}
-			return bd.doubleValue();
+			double p =  bd.doubleValue();
+			return p;
 		}
 	}
 }

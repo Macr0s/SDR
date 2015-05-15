@@ -6,7 +6,7 @@ import it.uniroma3.sdr.signalprocessing.model.Signal;
 
 public class Detector {
 	
-	public static final double PFA=Math.pow(10, -3);
+	public static final double PFA=Math.pow(10, -4);
 	private Signal s;
 	private MethodDetection md;
 	
@@ -18,16 +18,12 @@ public class Detector {
 	public double getPropabilityDetecetion(){
 		List<Signal> dividedSignal = s.divideInto(1000);
 		int successi = 0;
-		int i =0;
 		for(Signal s: dividedSignal){
-			i++; 
-			System.out.println("sono ad "+ i);
-			if (this.md.isSpectrumHole(s)){
-				System.out.println("non c'e l'utente "+ i);
+			if (!this.md.isSpectrumHole(s)){
 				successi++;
 			}
 		}
-		return ((double) successi/(double) dividedSignal.size());
+		return ((double) successi/(double) dividedSignal.size() * 100);
 	}
 	
 }

@@ -72,7 +72,7 @@ public class Signal implements SignalType {
 
 	public double snrCalculator(){
 		double snrNonDB = 1.0/(this.energy()-1);
-		System.out.println(snrNonDB);
+		if (snrNonDB <= 0) return Double.NEGATIVE_INFINITY;
 		return 10*Math.log10(snrNonDB);
 	}
 
@@ -84,5 +84,11 @@ public class Signal implements SignalType {
 		return dividedSignal;
 	}
 
-
+	public Signal somma(Signal s){
+		Signal s2 = new Signal(s.size());
+		for (int i = 0; i < s.size(); i++){
+			s2.add(i, this.get(i).sum(s.get(i)));
+		}
+		return s2;
+	}
 }
