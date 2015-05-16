@@ -12,46 +12,43 @@ import it.uniroma3.sdr.signalprocessing.model.signaltype.SignalFormType;
 public class Main {
 
 	public static void test(File f) throws Exception{
+		long start = System.currentTimeMillis() / 1000;
+		
 		Signal s = Signal.createFromFile(f);
 		
 		double snr = s.snrCalculator();
 		
-		System.out.println("SNR: "+snr);
+		System.out.print("\t"+snr);
 		
-		EnergyDetection md = new EnergyDetection(snr, Detector.PFA, s.size(),1000);
+		EnergyDetection md = new EnergyDetection(snr, Detector.PFA, s.size(), 10000);
 		Detector d = new Detector(s, md);
 		
-		System.out.println("Soglia: " + md.getEta());
-		System.out.println("PD: " +d.getPropabilityDetecetion() + "%");
+		System.out.print("\t" + md.getEta());
+		System.out.print("\t" +d.getPropabilityDetecetion() + "%");
 		
+		durata(start, System.currentTimeMillis() / 1000);
+	}
+	
+	public static void durata(long start, long stop){
+		long durata = stop - start;
+		long secondi = durata % 60;
+		long minuti = durata / 60;
+		
+		System.out.println("\t " + minuti + "m " + secondi + "s");
 	}
 	
 	public static void prepara(int i,int j) throws Exception{
-		System.out.println("Sequenza_"+i+" - output_"+j+"");
+		System.out.print("Sequenza_"+i+" - output_"+j+"");
 		test(new File("./Sequenze_SDR_2015/Sequenza_"+i+"/output_"+j+".dat"));
 		System.out.println();
 	}
 	
 	public static void main(String[] args) throws Exception {
-		
-//		for(int i = -20; i <= 20; i++){
-//			System.out.print(i + " ");
-//			int successi = 0;
-//			int max = 10000;
-//			for (int j = 0; j < max; j++){
-//				GeneratedSignal s = new GeneratedSignal(1000, new Noise(i));
-//				GeneratedSignal s2 = new GeneratedSignal(1000, new QPSK());
-//				int snr = (int) Math.round(s.somma(s2).snrCalculator());
-//				
-//				if (snr == i) successi++;
-//			}
-//			double p = ((double) successi / (double) max)*100;
-//			System.out.println(p + " %");
-//		}
-		
-		for(int i = 1; i <= 3;i++){
-			for (int j = 1; j <=4; j++){
-				prepara(i,j);
+		System.out.println("File \t SNR \t Soglia \t PD \t Durata");
+		for(int i = 1; i <= 4;i++){
+			if (i == 2) continue;
+			for (int j = 1; j <=3; j++){
+				prepara(j,i);
 			}
 		}
 	}
