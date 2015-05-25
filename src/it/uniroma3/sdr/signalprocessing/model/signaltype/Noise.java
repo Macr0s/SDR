@@ -4,6 +4,12 @@ import it.uniroma3.sdr.signalprocessing.model.Complex;
 
 import java.util.Random;
 
+/**
+ * Classe che implementa la forma del segnale di rumore
+ * 
+ * @author Oddi, Filippi, Sgaraglia
+ *
+ */
 public class Noise implements SignalFormType {
 	
 	private double snr;
@@ -20,10 +26,10 @@ public class Noise implements SignalFormType {
 		Random campione =null;
 		
 		campione = new Random();
-		double reale = campione.nextGaussian() * Math.sqrt(pot_rumore/2);
+		double reale = campione.nextGaussian() * Math.sqrt(pot_rumore/(double)2);
 		
 		campione = new Random();
-		double immaginaria = campione.nextGaussian() * Math.sqrt(pot_rumore/2);
+		double immaginaria = campione.nextGaussian() * Math.sqrt(pot_rumore/(double)2);
 		 
 		return new Complex(reale, immaginaria);
 	}

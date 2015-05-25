@@ -14,31 +14,33 @@ public class EnergyDetection implements MethodDetection{
 	private IpotesiH1 h1;
 	private double soglia;
 	private boolean sogliaCalcolata = false;
-	
-	
-	public EnergyDetection(double snr, double pfa,int size){
-		this(snr, pfa, size, size); 
-	}
-	
-	public EnergyDetection(double snr, double pfa,int size, int noiseSize){
+
+	public EnergyDetection(double snr, double pfa, int noiseSize){
 		this.h0 = new IpotesiH0(pfa, snr, noiseSize); 
 		this.h1 = new IpotesiH1(); 
 	}
+	
+	public EnergyDetection(double snr, double pfa, int noiseSize, int numeroTest){
+		this.h0 = new IpotesiH0(pfa, snr, noiseSize, numeroTest); 
+		this.h1 = new IpotesiH1(); 
+	}
 
-/**
- * Metodo che calcola la soglia di una trasmissione utilizzano l'ipotesi h0
- * (nota dei programmatori: in greco η = eta )
- * @return
- * @throws Exception 
- */
+	/**
+	 * Metodo che calcola la soglia di una trasmissione utilizzano l'ipotesi h0
+	 * (nota dei programmatori: in greco η = eta )
+	 * @return
+	 * @throws Exception 
+	 */
 	public double getEta() throws Exception {
-		this.soglia= this.h0.calcolaSoglia();
-		this.sogliaCalcolata = true;
+		if (!this.sogliaCalcolata){
+			this.soglia= this.h0.calcolaSoglia();
+			this.sogliaCalcolata = true;
+		}
 		return soglia;
 	}
 
 	/**
-	 * verifica se c'è uno specrtum hole
+	 * Metodo che verifica se c'è uno specrtum hole
 	 */
 	@Override
 	public boolean isSpectrumHole(Signal signal) {

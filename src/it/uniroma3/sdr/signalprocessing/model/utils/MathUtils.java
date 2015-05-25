@@ -8,7 +8,12 @@ import java.util.List;
 
 public class MathUtils {
 
-	//E[z]
+	/**
+	 * Metodo che calcola il valore medio di una lista di energie
+	 * 
+	 * @param energies la lista di energie
+	 * @return il valore medio
+	 */
 	public static double valorMedio(List<Double> energies){
 		int size = energies.size();
 		double mParziale =0;
@@ -17,8 +22,15 @@ public class MathUtils {
 		}
 		return mParziale/(double)size;
 	}
-	//E[(x-E[x])^2]
-	//o anche somm (Xi-Mx)^2
+	
+	/**
+	 * Metodo che calcola la varianza dell'energia data la lista delle energie
+	 * e il valore medio
+	 * 
+	 * @param energies la liste delle energie
+	 * @param meanValue il valore medio
+	 * @return la varianza
+	 */
 	public static double varianza(List<Double> energies,double meanValue){
 		int size = energies.size();
 		double vPartiale=0;
@@ -28,11 +40,9 @@ public class MathUtils {
 		return vPartiale/(double)size;
 	}
 
-
-
-
-	/* calcola la funzione di errore inversa */
-
+	/**
+	 * Metodo che calcola la funzione di errore inversa
+	 */
 	public static double InvErf(double d) throws Exception {
 		if (Math.abs(d) > 1) {
 			throw new Exception("Allowed values for argument in [-1,1]");

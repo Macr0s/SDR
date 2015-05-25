@@ -2,6 +2,12 @@ package it.uniroma3.sdr.signalprocessing.model.signaltype;
 
 import it.uniroma3.sdr.signalprocessing.model.Complex;
 
+/**
+ * Classe che implementa la forma del segnale modulato secondo una QPSK
+ * 
+ * @author Filippi, Sgaraglia, Oddi
+ *
+ */
 public class QPSK implements SignalFormType {
 
 	@Override

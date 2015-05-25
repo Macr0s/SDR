@@ -2,6 +2,12 @@ package it.uniroma3.sdr.signalprocessing.model;
 
 import it.uniroma3.sdr.signalprocessing.model.utils.ComplexUtils;
 
+/**
+ * Classe che rappresenta i numeri complessi e le loro operazioni
+ * 
+ * @author Filippi, Oddi, Sgaraglia
+ *
+ */
 public class Complex {
 	private double pRe;
 	private double pImm;

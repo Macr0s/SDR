@@ -15,7 +15,7 @@ import it.uniroma3.sdr.signalprocessing.model.Signal;
 public class Detector {
 	
 	private static final int NUMERO_SEZIONI = 1000;
-	public static final double PFA=Math.pow(10, -4);
+	public static final double PFA=Math.pow(10, -3);
 	private Signal s;
 	private MethodDetection md;
 	

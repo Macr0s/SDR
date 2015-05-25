@@ -1,56 +1,65 @@
 package it.uniroma3.sdr.signalprocessing;
 
-import java.io.File;
-import it.uniroma3.sdr.signalprocessing.library.Detector;
-import it.uniroma3.sdr.signalprocessing.library.phases.EnergyDetection;
-import it.uniroma3.sdr.signalprocessing.model.GeneratedSignal;
-import it.uniroma3.sdr.signalprocessing.model.Signal;
-import it.uniroma3.sdr.signalprocessing.model.signaltype.Noise;
-import it.uniroma3.sdr.signalprocessing.model.signaltype.QPSK;
-import it.uniroma3.sdr.signalprocessing.model.signaltype.SignalFormType;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+import it.uniroma3.sdr.signalprocessing.menu.HomeworkMenu;
+import it.uniroma3.sdr.signalprocessing.menu.Menu;
+import it.uniroma3.sdr.signalprocessing.menu.Menuinterface;
+import it.uniroma3.sdr.signalprocessing.menu.SettingValueMenu;
+import it.uniroma3.sdr.signalprocessing.menu.SettingValueMenuValidator;
+import it.uniroma3.sdr.signalprocessing.menu.SimulateMenu;
+import it.uniroma3.sdr.signalprocessing.menu.ViewSettingMenu;
 
 public class Main {
+	
+	private Scanner scanner;
+	
+	public Main(){
+		this.scanner = new Scanner(System.in);
+	}
+	
+	public Map<String, Object> getDefaultSetting(){
+		Map<String, Object> settings = new HashMap<>();
+		
+		settings.put("numeroTest", 1000);
+		
+		return settings;
+	}
+	
+	public void run(){
+		List<Menuinterface> mainMenu = new LinkedList<>();
+		mainMenu.add(new HomeworkMenu());
+		mainMenu.add(new SimulateMenu());
+		
+		List<Menuinterface> settingMenu = new LinkedList<>();
+		mainMenu.add(new Menu("Entra nel menu delle impostrazioni", settingMenu));
+		
+		settingMenu.add(new ViewSettingMenu());
+		
+		SettingValueMenuValidator v = new SettingValueMenuValidator(){
 
-	public static void test(File f) throws Exception{
-		long start = System.currentTimeMillis() / 1000;
+			@Override
+			public Object validator(String s) {
+				return Integer.parseInt(s);
+			}
+			
+		};
 		
-		Signal s = Signal.createFromFile(f);
+		settingMenu.add(new SettingValueMenu("numeroTest", 
+				"Inserisci il numero di prova", 
+				"Modifica il numero di prova", v));
 		
-		double snr = s.snrCalculator();
-		
-		System.out.print("\t"+snr);
-		
-		EnergyDetection md = new EnergyDetection(snr, Detector.PFA, s.size(), 10000);
-		Detector d = new Detector(s, md);
-		
-		System.out.print("\t" + md.getEta());
-		System.out.print("\t" +d.getPropabilityDetecetion() + "%");
-		
-		durata(start, System.currentTimeMillis() / 1000);
-	}
-	
-	public static void durata(long start, long stop){
-		long durata = stop - start;
-		long secondi = durata % 60;
-		long minuti = durata / 60;
-		
-		System.out.println("\t " + minuti + "m " + secondi + "s");
-	}
-	
-	public static void prepara(int i,int j) throws Exception{
-		System.out.print("Sequenza_"+i+" - output_"+j+"");
-		test(new File("./Sequenze_SDR_2015/Sequenza_"+i+"/output_"+j+".dat"));
-		System.out.println();
+		Menuinterface m = new Menu("Menu principale", mainMenu);
+		m.run(scanner, getDefaultSetting());
 	}
 	
 	public static void main(String[] args) throws Exception {
-		System.out.println("File \t SNR \t Soglia \t PD \t Durata");
-		for(int i = 1; i <= 4;i++){
-			if (i == 2) continue;
-			for (int j = 1; j <=3; j++){
-				prepara(j,i);
-			}
-		}
+		Main m = new Main();
+		m.run();
 	}
 
 }

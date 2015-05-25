@@ -8,6 +8,12 @@ import java.util.List;
 import it.uniroma3.sdr.signalprocessing.library.SignalProcessor;
 import it.uniroma3.sdr.signalprocessing.library.SignalUtils;
 
+/**
+ * Classe che implementa la logica  di un segnale TLC
+ * 
+ * @author Sgaraglia, Oddi, Filippi
+ *
+ */
 public class Signal implements SignalType {
 	private Complex[] values;
 
